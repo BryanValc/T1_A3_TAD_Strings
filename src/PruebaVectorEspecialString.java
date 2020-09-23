@@ -78,10 +78,10 @@ class VectorEspecialString {
 		}
 		if(pos==0) {
 			palabra=palabra.substring(1);
-		}else if(pos==palabra.length()) {
-			palabra=palabra.substring(0, palabra.length()-2);
+		}else if(pos==palabra.length()-1) {
+			palabra=palabra.substring(0, palabra.length()-1);
 		}else {
-			palabra=palabra.substring(0,pos-1)+palabra.substring(pos);
+			palabra=palabra.substring(0,pos)+palabra.substring(pos+1);
 		}
 		palabras[sub]=palabra;
 		this.setPalabras(palabras);	
@@ -111,6 +111,27 @@ class VectorEspecialString {
 		
 	}
 	public void eliminarSubcadenaPosicionEspecifica(int sub) {
+		sub=sub-1;
+		String palabras[]= Arrays.copyOf(this.getPalabras(), this.getPalabras().length + 1);
+		while(sub>=palabras.length-1) {
+			System.out.println("subcadena fuera del rango, ingrese otro indice para la subcadena: ");
+			sub=this.validacionNatural()-1;
+		}
+		if(sub==0) {
+			for (int i = 0; i < palabras.length-1; i++) {
+				palabras[i]=palabras[i+1];
+			}
+		}else if(sub==palabras.length-1) {
+		}else {
+			for (int i = 0; i < palabras.length-1; i++) {
+				palabras[i]=palabras[i];
+				if(i>=sub) {
+					palabras[i]=palabras[i+1];
+				}
+			}
+		}
+		String[] newArray = Arrays.copyOf(palabras, palabras.length-2);
+		this.setPalabras(newArray);
 		
 	}
 
@@ -153,6 +174,16 @@ public class PruebaVectorEspecialString {
 		VectorEspecialString ves0 = new VectorEspecialString(nombres);
 		
 		ves0.mostrarCadenaInvertida();
+		System.out.println(ves0.toString());
+		ves0.agregarCaracterPosicionEspecifica(1, 6, 's');
+		System.out.println(ves0.toString());
+		ves0.eliminarCaracterPosicionEspecifica(1, 3);
+		System.out.println(ves0.toString());
+		ves0.agregarSubcadenaPosicionEspecifica(5,"erick");
+		System.out.println(ves0.toString());
+		ves0.eliminarSubcadenaPosicionEspecifica(2);
+		System.out.println(ves0.toString());
+		
 
 	}
 
