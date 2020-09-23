@@ -153,8 +153,19 @@ class VectorEspecialString {
 				System.out.print(strLo.charAt(i));
 			}
 		}
+		System.out.println();
 	}
-	
+	public void mostrarCapitalizado() {
+		String palabras[]=this.getPalabras();
+		for (int i = 0; i < palabras.length; i++) {
+			System.out.print(palabras[i].toUpperCase().charAt(0));
+			if (palabras[i].length()>1) {
+				System.out.print(palabras[i].substring(1));
+			}
+			System.out.print(" ");
+		}
+		System.out.println();
+	}
 	@Override
 	public String toString() {
 		return "VectorEspecialString [palabras=" + Arrays.toString(this.getPalabras()) + "]";
@@ -204,6 +215,7 @@ public class PruebaVectorEspecialString {
 		ves0.eliminarSubcadenaPosicionEspecifica(2);
 		System.out.println(ves0.toString());
 		ves0.camelCaseEspecial();
+		ves0.mostrarCapitalizado();
 		
 
 	}
