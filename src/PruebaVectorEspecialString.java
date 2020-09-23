@@ -64,12 +64,53 @@ class VectorEspecialString {
 		this.setPalabras(palabras);	
 	}
 	public void eliminarCaracterPosicionEspecifica(int sub, int pos) {
+		sub=sub-1;
+		pos=pos-1;
+		String palabras[]=this.getPalabras();
+		while(sub>=palabras.length) {
+			System.out.println("subcadena fuera del rango, ingrese otro indice para la subcadena: ");
+			sub=this.validacionNatural()-1;
+		}
+		String palabra=palabras[sub];
+		while(pos>=palabra.length()) {
+			System.out.println("caracter fuera del rango, ingrese otro indice para el caracter: ");
+			pos=this.validacionNatural()-1;
+		}
+		if(pos==0) {
+			palabra=palabra.substring(1);
+		}else if(pos==palabra.length()) {
+			palabra=palabra.substring(0, palabra.length()-2);
+		}else {
+			palabra=palabra.substring(0,pos-1)+palabra.substring(pos);
+		}
+		palabras[sub]=palabra;
+		this.setPalabras(palabras);	
 		
 	}
-	public void agregarSubcadenaPosicionEspecifica(int sub, int pos, char chr) {
+	public void agregarSubcadenaPosicionEspecifica(int sub, String str) {
+		sub=sub-1;
+		String palabras[]= Arrays.copyOf(this.getPalabras(), this.getPalabras().length + 1);
+		while(sub>palabras.length-1) {
+			System.out.println("subcadena fuera del rango, ingrese otro indice para la subcadena: ");
+			sub=this.validacionNatural()-1;
+		}
+		if(sub==0) {
+			for (int i = palabras.length-1; i > 0; i--) {
+				palabras[i]=palabras[i-1];
+			}
+			palabras[0]=str;
+		}else if(sub==palabras.length-1) {
+			palabras[palabras.length-1]=str;
+		}else {
+			for (int i = palabras.length-1; i > sub; i--) {
+				palabras[i]=palabras[i-1];
+			}
+			palabras[sub]=str;
+		}
+		this.setPalabras(palabras);	
 		
 	}
-	public void eliminarSubcadenaPosicionEspecifica(int sub, int pos) {
+	public void eliminarSubcadenaPosicionEspecifica(int sub) {
 		
 	}
 
