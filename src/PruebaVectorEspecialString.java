@@ -39,7 +39,6 @@ class VectorEspecialString {
 		} while (err);
 		System.out.println();
 	}
-	
 	public void agregarCaracterPosicionEspecifica(int sub, int pos, char chr) {
 		sub=sub-1;
 		pos=pos-1;
@@ -182,7 +181,7 @@ class VectorEspecialString {
 				err=true;
 				continue;
 			}
-			if (ret>-1) {
+			if (ret>0) {
 				err=false;
 			}else {
 				System.out.println("solo números naturales");
@@ -201,22 +200,64 @@ public class PruebaVectorEspecialString {
 		
 		Scanner input = new Scanner(System.in);
 		
-		String nombres[]= {"bryan", "cesar", "ruby", "denise"};
-		VectorEspecialString ves0 = new VectorEspecialString(nombres);
+		VectorEspecialString ves0 = new VectorEspecialString();
+		boolean salir = false;
+		byte opc = 0;
 		
-		ves0.mostrarCadenaInvertida();
-		System.out.println(ves0.toString());
-		ves0.agregarCaracterPosicionEspecifica(1, 6, 's');
-		System.out.println(ves0.toString());
-		ves0.eliminarCaracterPosicionEspecifica(1, 3);
-		System.out.println(ves0.toString());
-		ves0.agregarSubcadenaPosicionEspecifica(5,"erick");
-		System.out.println(ves0.toString());
-		ves0.eliminarSubcadenaPosicionEspecifica(2);
-		System.out.println(ves0.toString());
-		ves0.camelCaseEspecial();
-		ves0.mostrarCapitalizado();
+		System.out.println("tamaño del vector:");
+		int sz=ves0.validacionNatural();
+		String palabras[]=new String[sz];
+		for (int i = 0; i < sz; i++) {
+			System.out.println("elemento "+(i+1)+": ");
+			palabras[i]=input.nextLine();
+		}
+		VectorEspecialString ve1 = new VectorEspecialString(palabras);
 		
+		do {
+			System.out.println("1)Mostrar cadena invertida \n 2)Agregar caracter posicion especifica "
+					+ "\n 3)Eliminar caracter posicion especifica \n 4)Agregar subcadena posicion especifica"
+					+ "\n 5)Eliminar subcadena posicion especifica \n 6)CaMeL CaSe Especial "
+					+ "\n 7)Mostrar capitalizado \n 8)Salir");
+			opc=(byte) ves0.validacionNatural();
+			
+			switch (opc) {
+			case 1:
+				ve1.mostrarCadenaInvertida();break;
+			case 2:
+				System.out.println("indice de subcadena: ");
+				int sub= ves0.validacionNatural();
+				System.out.println("indice del caracter dentro de la subcadena: ");
+				int pos= ves0.validacionNatural();
+				System.out.println("caracter a ingresar: ");
+				char chr = input.next().toLowerCase().charAt(0);
+				ve1.agregarCaracterPosicionEspecifica(sub, pos, chr);break;
+			case 3:
+				System.out.println("indice de subcadena: ");
+				int sub1= ves0.validacionNatural();
+				System.out.println("indice del caracter dentro de la subcadena: ");
+				int pos1= ves0.validacionNatural();
+				ve1.eliminarCaracterPosicionEspecifica(sub1, pos1);break;
+			case 4:
+				System.out.println("indice de subcadena: ");
+				int sub2= ves0.validacionNatural();
+				System.out.println("subcadena a agregar: ");
+				String str = input.nextLine().toLowerCase();
+				ve1.agregarSubcadenaPosicionEspecifica(sub2, str);break;
+			case 5:
+				System.out.println("indice de subcadena: ");
+				int sub3= ves0.validacionNatural();
+				ve1.eliminarSubcadenaPosicionEspecifica(sub3);break;
+			case 6:
+				ve1.camelCaseEspecial();break;
+			case 7:
+				ve1.mostrarCapitalizado();break;
+			case 8:
+				salir=true;break;
+			default:break;
+			}
+			
+		} while (!salir);
+		System.out.println("fin de la ejecución");
 
 	}
 
