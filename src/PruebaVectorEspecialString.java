@@ -253,7 +253,9 @@ public class PruebaVectorEspecialString {
 				ve1.mostrarCapitalizado();break;
 			case 8:
 				salir=true;break;
-			default:break;
+			default:
+				System.out.println("entrada no válida");
+				break;
 			}
 			
 		} while (!salir);
