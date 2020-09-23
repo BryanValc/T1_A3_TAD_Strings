@@ -134,7 +134,27 @@ class VectorEspecialString {
 		this.setPalabras(newArray);
 		
 	}
-
+	public void camelCaseEspecial() {
+		String str="";
+		String palabras[]=this.getPalabras();
+		for (int i = 0; i < palabras.length; i++) {
+			str=str+palabras[i]+" ";
+		}
+		String strUp=str.toUpperCase();
+		String strLo=str.toLowerCase();
+		int j=0;
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i)!=' ') {
+				j++;
+			}
+			if(j%2!=0) {
+				System.out.print(strUp.charAt(i));
+			}else {
+				System.out.print(strLo.charAt(i));
+			}
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "VectorEspecialString [palabras=" + Arrays.toString(this.getPalabras()) + "]";
@@ -183,6 +203,7 @@ public class PruebaVectorEspecialString {
 		System.out.println(ves0.toString());
 		ves0.eliminarSubcadenaPosicionEspecifica(2);
 		System.out.println(ves0.toString());
+		ves0.camelCaseEspecial();
 		
 
 	}
